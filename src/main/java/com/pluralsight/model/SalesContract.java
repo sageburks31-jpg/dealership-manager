@@ -7,11 +7,13 @@ import java.time.LocalDate;
 
 public class SalesContract extends Contract {
 
-    BigDecimal salesTaxAmount;
-    BigDecimal recordingFee;
-    boolean isFinanced;
+    private BigDecimal salesTaxAmount;
+    private BigDecimal recordingFee = new BigDecimal(100);
+    private boolean isFinanced;
 
-    public SalesContract() {}
+    public SalesContract() {
+        salesTaxAmount  = new BigDecimal(0.05 / Double.parseDouble(String.valueOf(getVehicleSold().getPrice())));
+    }
     public SalesContract(BigDecimal salesTaxAmount, BigDecimal recordingFee, boolean isFinanced) {
         this.salesTaxAmount = salesTaxAmount;
         this.recordingFee = recordingFee;
@@ -26,6 +28,14 @@ public class SalesContract extends Contract {
     }
     public SalesContract(LocalDate contractDate, String customerName, String customerEmail, Vehicle vehicleSold) {
         super(contractDate, customerName, customerEmail, vehicleSold);
+        salesTaxAmount  = new BigDecimal( 0.05 / Double.parseDouble(String.valueOf(vehicleSold.getPrice())));
+    }
+
+    public BigDecimal getProcessioningFee() {
+        if (Double.parseDouble(String.valueOf(getVehicleSold().getPrice()))<10000){
+            return new BigDecimal(295);
+        }
+        return new BigDecimal(495);
     }
 
     public BigDecimal getSalesTaxAmount() {return salesTaxAmount;}

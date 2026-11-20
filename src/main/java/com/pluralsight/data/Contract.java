@@ -5,10 +5,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public abstract class Contract {
-LocalDate contractDate;
-String customerName;
-String customerEmail;
-Vehicle vehicleSold;
+    private LocalDate contractDate;
+    private String customerName;
+    private String customerEmail;
+    private Vehicle vehicleSold;
 
     public Contract() {}
     public Contract(LocalDate contractDate, String customerName, String customerEmail, Vehicle vehicleSold) {

@@ -7,8 +7,8 @@ import java.time.LocalDate;
 
 public class LeaseContract extends Contract {
 
-    BigDecimal expectingEndingValue;
-    BigDecimal leaseFee;
+    private BigDecimal expectingEndingValue;
+    private BigDecimal leaseFee;
 
     public LeaseContract() {}
     public LeaseContract(BigDecimal expectingEndingValue, BigDecimal leaseFee) {
