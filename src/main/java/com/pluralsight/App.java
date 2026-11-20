@@ -1,13 +1,17 @@
 package com.pluralsight;
 
+import com.pluralsight.model.Dealership;
+import com.pluralsight.ui.UserInterface;
+
 import java.util.*;
 import java.math.*;
-import static java.lang.Thread.*;
+
+import static java.lang.Thread.sleep;
 
 public class App {
 
-    static Scanner scanner = new Scanner(System.in);
-    static Dealership dealership;
+    public static Scanner scanner = new Scanner(System.in);
+    public static Dealership dealership;
 
     public static void main(String[] args) {
         UserInterface userInterface = new UserInterface();
@@ -23,14 +27,19 @@ public class App {
                 return Integer.parseInt(App.scanner.nextLine().trim());
             } catch (NumberFormatException e) {
                 System.out.println("command is invalid\n");
-                try {
-                    Thread.sleep(900);
-                } catch (InterruptedException ex) {
-                    throw new RuntimeException(ex);
-                }
+                stallRunTime();
             }
         } while (true);
     }
+
+    private static void stallRunTime() {
+        try {
+            sleep(900);
+        } catch (InterruptedException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
     public static String promptToString(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -67,11 +76,7 @@ public class App {
                 return new BigDecimal(App.scanner.nextLine().trim());
             } catch (NumberFormatException e) {
                 System.out.println("command is invalid\n");
-                try {
-                    sleep(900);
-                } catch (InterruptedException ex) {
-                    throw new RuntimeException(ex);
-                }
+                stallRunTime();
             }
         } while (true);
     }

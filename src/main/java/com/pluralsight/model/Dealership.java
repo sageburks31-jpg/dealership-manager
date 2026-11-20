@@ -1,4 +1,7 @@
-package com.pluralsight;
+package com.pluralsight.model;
+
+import com.pluralsight.App;
+import com.pluralsight.data.DealershipFileManager;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -8,7 +11,7 @@ public class Dealership {
     private final String phoneNumber;
     private final String address;
     private final ArrayList<Vehicle> vehicleList = new ArrayList<>();
-    static int targetIndex=-1;
+    public static int targetIndex=-1;
 
     public Dealership(String name, String phoneNumber, String address) {
         this.name = name;

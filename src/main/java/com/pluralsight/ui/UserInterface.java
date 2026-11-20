@@ -1,4 +1,9 @@
-package com.pluralsight;
+package com.pluralsight.ui;
+
+import com.pluralsight.App;
+import com.pluralsight.model.Dealership;
+import com.pluralsight.data.DealershipFileManager;
+import com.pluralsight.model.Vehicle;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -12,7 +17,7 @@ public class UserInterface {
         dealership = App.dealership;
         System.out.println(dealership.toRow());
     }
-    protected void displayMainMenu() {
+    public void displayMainMenu() {
         init();
         int intAnswer;
         do {

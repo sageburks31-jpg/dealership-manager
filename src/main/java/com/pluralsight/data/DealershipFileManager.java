@@ -1,4 +1,9 @@
-package com.pluralsight;
+package com.pluralsight.data;
+
+import com.pluralsight.App;
+import com.pluralsight.model.Dealership;
+import com.pluralsight.model.Vehicle;
+import com.pluralsight.ui.UserInterface;
 
 import java.io.*;
 import java.math.BigDecimal;
