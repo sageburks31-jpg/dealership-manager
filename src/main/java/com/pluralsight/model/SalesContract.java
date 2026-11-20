@@ -1,7 +1,5 @@
 package com.pluralsight.model;
 
-import com.pluralsight.data.Contract;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -28,7 +26,7 @@ public class SalesContract extends Contract {
     }
     public SalesContract(LocalDate contractDate, String customerName, String customerEmail, Vehicle vehicleSold) {
         super(contractDate, customerName, customerEmail, vehicleSold);
-        salesTaxAmount  = new BigDecimal( 0.05 / Double.parseDouble(String.valueOf(vehicleSold.getPrice())));
+        salesTaxAmount = new BigDecimal( 0.05 / Double.parseDouble(String.valueOf(vehicleSold.getPrice())));
     }
 
     public BigDecimal getProcessioningFee() {
@@ -47,12 +45,12 @@ public class SalesContract extends Contract {
     public boolean isFinanced() {return isFinanced;}
     public void setFinanced(boolean financed) {isFinanced = financed;}
 
-    public String salesToRow(){
-        return String.format("salesTaxAmount: %s | recordingFee: %s | isFinanced: %b | %s",
+    public String toRow() {
+        return String.format("%s | salesTaxAmount: %s | recordingFee: %s | isFinanced: %b",
+                contractToRow(),
                 getSalesTaxAmount(),
                 getRecordingFee(),
-                isFinanced(),
-                contractToRow());
+                isFinanced());
     }
 
     @Override

@@ -1,6 +1,5 @@
-package com.pluralsight.data;
+package com.pluralsight.model;
 
-import com.pluralsight.model.Vehicle;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 

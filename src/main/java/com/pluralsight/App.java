@@ -1,5 +1,6 @@
 package com.pluralsight;
 
+import com.pluralsight.data.ContractDataManager;
 import com.pluralsight.model.Dealership;
 import com.pluralsight.ui.UserInterface;
 
@@ -14,8 +15,10 @@ public class App {
     public static Dealership dealership;
 
     public static void main(String[] args) {
+        ContractDataManager.readFromFile();
         UserInterface userInterface = new UserInterface();
         userInterface.displayMainMenu();
+        ContractDataManager.writeToFile(true);
         System.out.print("thank you for using this program");
         scanner.close();
     }
@@ -100,4 +103,5 @@ public class App {
             return false;
         }
     }
+
 }

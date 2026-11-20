@@ -1,7 +1,5 @@
 package com.pluralsight.model;
 
-import com.pluralsight.data.Contract;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -10,15 +8,16 @@ public class LeaseContract extends Contract {
     private BigDecimal expectingEndingValue;
     private BigDecimal leaseFee;
 
-    public LeaseContract() {
-        this.expectingEndingValue = getVehicleSold().getPrice().divide(new BigDecimal(".5"));
-        this.leaseFee = getVehicleSold().getPrice().divide(new BigDecimal(".07"));
+    public LeaseContract() {init();}
+
+    private void init() {
+        this.expectingEndingValue = new BigDecimal(Double.parseDouble(String.valueOf(getVehicleSold().getPrice()))/.5);
+        this.leaseFee = new BigDecimal(Double.parseDouble(String.valueOf(getVehicleSold().getPrice()))/.07);
     }
+
     public LeaseContract(LocalDate contractDate, String customerName, String customerEmail, Vehicle vehicleSold) {
         super(contractDate, customerName, customerEmail, vehicleSold);
-        this.expectingEndingValue = getVehicleSold().getPrice().divide(new BigDecimal(".5"));
-        this.leaseFee = getVehicleSold().getPrice().divide(new BigDecimal(".07"));
-
+        init();
     }
 
     public BigDecimal getExpectingEndingValue() {return expectingEndingValue;}
@@ -27,7 +26,7 @@ public class LeaseContract extends Contract {
     public BigDecimal getLeaseFee() {return leaseFee;}
     public void setLeaseFee(BigDecimal leaseFee) {this.leaseFee = leaseFee;}
 
-    public String salesToRow(){
+    public String toRow() {
         return String.format("expectingEndingValue: %s | leaseFee: %s | %s",
                 getExpectingEndingValue(),
                 getLeaseFee(),
