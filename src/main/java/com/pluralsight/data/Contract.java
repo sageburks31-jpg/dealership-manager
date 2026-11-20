@@ -32,4 +32,12 @@ public abstract class Contract {
 
     public abstract BigDecimal getTotalPrice();
     public abstract BigDecimal getMonthlyPayments();
+
+    public String contractToRow() {
+        return String.format("contractDate: %s | customerName: %s | customerEmail: %s | %s ",
+                getContractDate(),
+                getCustomerName(),
+                getCustomerEmail(),
+                vehicleSold.toRow());
+    }
 }

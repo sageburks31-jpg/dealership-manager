@@ -47,12 +47,28 @@ public class SalesContract extends Contract {
     public boolean isFinanced() {return isFinanced;}
     public void setFinanced(boolean financed) {isFinanced = financed;}
 
+    public String salesToRow(){
+        return String.format("salesTaxAmount: %s | recordingFee: %s | isFinanced: %b | %s",
+                getSalesTaxAmount(),
+                getRecordingFee(),
+                isFinanced(),
+                contractToRow());
+    }
+
     @Override
     public BigDecimal getTotalPrice() {
-        return null;
+        return new BigDecimal(Double.parseDouble(String.valueOf(getVehicleSold().getPrice())) + Double.parseDouble(String.valueOf(salesTaxAmount)) + Double.parseDouble(String.valueOf(recordingFee)) + Double.parseDouble(String.valueOf(getProcessioningFee())));
     }
     @Override
     public BigDecimal getMonthlyPayments() {
-        return null;
+        BigDecimal bigDecimal = new BigDecimal("0");
+        if (isFinanced){
+            if (Double.parseDouble(String.valueOf(getVehicleSold().getPrice())) >= 10000) {
+                bigDecimal = new BigDecimal(String.valueOf(.0425/48));
+            } else {
+                bigDecimal = new BigDecimal(String.valueOf(.0525/24));
+            }
+        }
+        return bigDecimal;
     }
 }

@@ -10,19 +10,15 @@ public class LeaseContract extends Contract {
     private BigDecimal expectingEndingValue;
     private BigDecimal leaseFee;
 
-    public LeaseContract() {}
-    public LeaseContract(BigDecimal expectingEndingValue, BigDecimal leaseFee) {
-        this.expectingEndingValue = expectingEndingValue;
-        this.leaseFee = leaseFee;
-    }
-
-    public LeaseContract(LocalDate contractDate, String customerName, String customerEmail, Vehicle vehicleSold, BigDecimal expectingEndingValue, BigDecimal leaseFee) {
-        super(contractDate, customerName, customerEmail, vehicleSold);
-        this.expectingEndingValue = expectingEndingValue;
-        this.leaseFee = leaseFee;
+    public LeaseContract() {
+        this.expectingEndingValue = getVehicleSold().getPrice().divide(new BigDecimal(".5"));
+        this.leaseFee = getVehicleSold().getPrice().divide(new BigDecimal(".07"));
     }
     public LeaseContract(LocalDate contractDate, String customerName, String customerEmail, Vehicle vehicleSold) {
         super(contractDate, customerName, customerEmail, vehicleSold);
+        this.expectingEndingValue = getVehicleSold().getPrice().divide(new BigDecimal(".5"));
+        this.leaseFee = getVehicleSold().getPrice().divide(new BigDecimal(".07"));
+
     }
 
     public BigDecimal getExpectingEndingValue() {return expectingEndingValue;}
@@ -31,12 +27,15 @@ public class LeaseContract extends Contract {
     public BigDecimal getLeaseFee() {return leaseFee;}
     public void setLeaseFee(BigDecimal leaseFee) {this.leaseFee = leaseFee;}
 
-    @Override
-    public BigDecimal getTotalPrice() {
-        return null;
+    public String salesToRow(){
+        return String.format("expectingEndingValue: %s | leaseFee: %s | %s",
+                getExpectingEndingValue(),
+                getLeaseFee(),
+                contractToRow());
     }
+
     @Override
-    public BigDecimal getMonthlyPayments() {
-        return null;
-    }
+    public BigDecimal getTotalPrice() {return leaseFee.add(expectingEndingValue);}
+    @Override
+    public BigDecimal getMonthlyPayments() {return new BigDecimal(String.valueOf(.04/36));}
 }
